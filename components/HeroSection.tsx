@@ -17,7 +17,9 @@ export default function HeroSection() {
 					curated artisan coffees from our best roasters delivered directly to
 					your door, at your schedule.
 				</p>
-				<Link href='#how-it-works'>See how it works</Link>
+				<Link href='#how-it-works' className='btn btn-primary'>
+					See how it works
+				</Link>
 			</article>
 		</section>
 	);

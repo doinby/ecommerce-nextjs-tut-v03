@@ -1,9 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
 @import 'tailwindcss';
+@plugin "daisyui" {
+	themes: light --default;
+}
 
-:root {
+@plugin "daisyui/theme" {
+	name: 'light';
+	default: true;
+	--color-base-content: oklch(
+		0.3568 0.0278 256.82
+	); /* Dark Grey Blue | Charcoal */
+	--color-primary: #0e8784; /* Dark Cyan */
+	--color-primary-content: white; /* Dark Cyan */
+	--color-secondary: #fdd6ba; /* Pale Orange */
+	--color-accent: oklch(0.3568 0.0278 256.82); /* Dark Grey Blue | Charcoal */
+	--color-neutral: #83888f; /* Mid Grey */
+}
+
+/* :root {
 	--background: #ffffff;
 	--foreground: #171717;
-}
+} */
 
 /* @theme inline {
   --color-background: var(--background);
@@ -12,15 +29,23 @@
   --font-mono: var(--font-geist-mono);
 } */
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	:root {
 		--background: #0a0a0a;
 		--foreground: #ededed;
 	}
-}
+} */
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+	@apply bg-eggshell
+	/* background: var(--background);
+	color: var(--foreground); */
+	/* font-family: Arial, Helvetica, sans-serif; */;
+}
+
+@theme {
+	--font-sans: 'Barlow', sans-serif;
+	--font-serif: 'Fraunces', serif;
+	--color-charcoal: #333d4b;
+	--color-eggshell: #fefcf7;
 }
