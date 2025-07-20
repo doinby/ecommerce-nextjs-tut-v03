@@ -1,3 +1,4 @@
+import HeroSection from '@/components/HeroSection';
 import { stripe } from '@/lib/stripe';
 
 export default async function Home() {
@@ -5,7 +6,11 @@ export default async function Home() {
 		expand: ['data.default_price'],
 		limit: 5,
 	});
-	console.log(products);
+	// console.log(products);
 
-	return <></>;
+	return (
+		<>
+			<HeroSection />
+		</>
+	);
 }
