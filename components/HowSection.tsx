@@ -46,7 +46,7 @@ export default function HowSection({ pathname = '/' }: HowSectionProps) {
 	return (
 		<section
 			id='how-it-works'
-			className={`${config.backgroundColor} ${config.textColor} px-6 space-y-10`}
+			className={`${config.backgroundColor} ${config.textColor} px-6 space-y-10 rounded-xl`}
 		>
 			{config.hasHeadline && <h2 className='text-2xl'>How it works</h2>}
 			<article className='grid grid-cols-[repeat(3,18rem)] gap-16'>
