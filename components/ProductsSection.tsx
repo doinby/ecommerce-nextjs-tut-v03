@@ -8,7 +8,7 @@ type ProductsProps = {
 export default function ProductsSection({ products }: ProductsProps) {
 	return (
 		<section className='relative flex justify-center'>
-			<h2 className='absolute bottom-[70%] lowercase text-[9rem] font-bold font-serif'>
+			<h2 className='absolute bottom-[70%] lowercase text-[9rem]'>
 				Our Collection
 			</h2>
 			<div className='flex gap-12'>
@@ -26,9 +26,7 @@ export default function ProductsSection({ products }: ProductsProps) {
 									height={200}
 									className='z-2'
 								/>
-								<h3 className='text-2xl font-serif font-bold'>
-									{product.name}
-								</h3>
+								<h3 className='text-2xl'>{product.name}</h3>
 								<p className='text-center'>{product.description}</p>
 							</article>
 						);
