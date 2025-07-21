@@ -1,25 +1,32 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { ReactNode } from 'react';
 
-export default function HeroSection() {
+type HeroSectionProps = {
+	children?: ReactNode;
+	content: {
+		image: string;
+		headline: string;
+		description: string;
+	};
+};
+
+export default function HeroSection({
+	content: { image, headline, description },
+	children,
+}: HeroSectionProps) {
 	return (
 		<section className='relative flex items-center'>
 			<Image
-				src='/assets/home/desktop/image-hero-coffeepress.jpg'
+				src={image}
 				width={1280}
 				height={600}
-				alt='hero image'
+				alt=''
+				className='rounded-xl'
 			/>
 			<article className='w-[32%] mx-16 space-y-6 absolute text-accent-content'>
-				<h1 className='text-6xl'>Great coffee made simple.</h1>
-				<p>
-					Start your mornings with the world’s best coffees. Try our expertly
-					curated artisan coffees from our best roasters delivered directly to
-					your door, at your schedule.
-				</p>
-				<Link href='#how-it-works' className='btn btn-primary'>
-					See how it works
-				</Link>
+				<h1 className='text-6xl'>{headline}</h1>
+				<p>{description}</p>
+				{children}
 			</article>
 		</section>
 	);
