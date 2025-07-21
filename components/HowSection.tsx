@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 const cards = [
 	{
 		title: 'Pick your coffee',
@@ -16,10 +18,24 @@ const cards = [
 	},
 ];
 
-export default function HowSection() {
+type HowSectionProps = {
+	disableHeadline: boolean;
+	backgroundColor: 'inherit' | 'bg-accent';
+};
+
+export default function HowSection({
+	disableHeadline = false,
+	backgroundColor = 'inherit',
+}: HowSectionProps) {
+	const textColor =
+		backgroundColor === 'bg-accent' ? 'text-accent-content' : 'inherit';
+
 	return (
-		<section className='px-6 space-y-10'>
-			<h2 className='text-2xl'>How it works</h2>
+		<section
+			id='how-it-works'
+			className={`${backgroundColor} ${textColor} px-6 space-y-10`}
+		>
+			{!disableHeadline && <h2 className='text-2xl'>How it works</h2>}
 			<article className='grid grid-cols-[repeat(3,18rem)] gap-16'>
 				{cards.map((card, idx) => {
 					const id = card.title
@@ -39,7 +55,9 @@ export default function HowSection() {
 					);
 				})}
 			</article>
-			<button className='btn btn-primary'>Create your plan</button>
+			<Link href='/create-a-plan' className='btn btn-primary'>
+				Create your plan
+			</Link>
 		</section>
 	);
 }
