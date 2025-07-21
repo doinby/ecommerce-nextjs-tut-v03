@@ -28,7 +28,7 @@ export default async function Home() {
 			</HeroSection>
 			<ProductsSection products={products.data} />
 			<WhyUsSection />
-			<HowSection disableHeadline={false} backgroundColor='inherit' />
+			<HowSection />
 		</>
 	);
 }

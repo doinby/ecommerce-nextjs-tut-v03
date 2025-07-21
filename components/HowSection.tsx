@@ -18,24 +18,37 @@ const cards = [
 	},
 ];
 
+const configs = [
+	{
+		pathname: '/',
+		hasHeadline: true,
+		backgroundColor: 'inherit',
+		textColor: 'inherit',
+		hasCta: true, // CTA = call to action
+	},
+	{
+		pathname: '/create-a-plan',
+		hasHeadline: false,
+		backgroundColor: 'bg-accent',
+		textColor: 'text-accent-content',
+		hasCta: false, // CTA = call to action
+	},
+];
+
 type HowSectionProps = {
-	disableHeadline: boolean;
-	backgroundColor: 'inherit' | 'bg-accent';
+	pathname?: string;
 };
 
-export default function HowSection({
-	disableHeadline = false,
-	backgroundColor = 'inherit',
-}: HowSectionProps) {
-	const textColor =
-		backgroundColor === 'bg-accent' ? 'text-accent-content' : 'inherit';
+export default function HowSection({ pathname = '/' }: HowSectionProps) {
+	const config =
+		configs.find((item) => item.pathname === pathname) ?? configs[0];
 
 	return (
 		<section
 			id='how-it-works'
-			className={`${backgroundColor} ${textColor} px-6 space-y-10`}
+			className={`${config.backgroundColor} ${config.textColor} px-6 space-y-10`}
 		>
-			{!disableHeadline && <h2 className='text-2xl'>How it works</h2>}
+			{config.hasHeadline && <h2 className='text-2xl'>How it works</h2>}
 			<article className='grid grid-cols-[repeat(3,18rem)] gap-16'>
 				{cards.map((card, idx) => {
 					const id = card.title
@@ -55,9 +68,11 @@ export default function HowSection({
 					);
 				})}
 			</article>
-			<Link href='/create-a-plan' className='btn btn-primary'>
-				Create your plan
-			</Link>
+			{config.hasCta ?? (
+				<Link href='/create-a-plan' className='btn btn-primary'>
+					Create your plan
+				</Link>
+			)}
 		</section>
 	);
 }
