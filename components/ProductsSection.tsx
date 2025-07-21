@@ -1,27 +1,8 @@
-// active: true
-// created: 1753009175
-//  default_price: {
-// id: 'price_1RmuyBRrXx3nlrwwBSsdwmU2',
-//     currency: 'aud',
-//     product: 'prod_SiLfDiJSfDMOPR',
-//     recurring: {
-//       interval: 'week',
-//       interval_count: 3,
-//     },
-//     type: 'recurring',
-//     unit_amount: 3500,
-//   }
-// description: "Ethiopian hand-harvested blend densely packed with vibrant fruit notes"
-// id: "prod_SiLfDiJSfDMOPR"
-// images: Array [ "https://files.stripe.com/links/MDB8YWNjdF8xUm1aUVJSclh4M25scnd3fGZsX3Rlc3RfVmhjRmEzOEFmbjV1MUROeGR2NUhZcjA5008fV0SHSh" ]
-// name: "Danche"
-// object: "product"
-
-import { Product } from '@/lib/interfaces';
+import Stripe from 'stripe';
 import Image from 'next/image';
 
 type ProductsProps = {
-	products: Product[];
+	products: Stripe.Product[];
 };
 
 export default function ProductsSection({ products }: ProductsProps) {
