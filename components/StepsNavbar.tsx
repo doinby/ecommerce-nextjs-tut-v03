@@ -18,29 +18,28 @@ export default function StepsNavbar({
 	activeStep,
 	setActiveStep,
 }: StepsNavbarProps) {
-	function getActiveClass(idx: number) {
+	function getStepClass(idx: number) {
 		return classNames({
 			'relative py-6 border-b-1': true,
 			'text-primary after:content-[&#32;] after:absolute after:left-0 after:bottom-0 after:w-full after:border-primary/100 after:border-b-3':
 				idx === activeStep,
 		});
 	}
+
 	return (
-		<>
-			<ul className='text-2xl text-charcoal/45 font-serif font-black'>
-				{stepsList.map((step, idx) => {
-					const key = getKeyId(step).concat('-step');
-					return (
-						<li
-							key={key}
-							onClick={() => setActiveStep(idx)}
-							className={`${getActiveClass(idx)}`}
-						>
-							{`${String(idx + 1).padStart(2, '0')} ${step}`}
-						</li>
-					);
-				})}
-			</ul>
-		</>
+		<ul className='shrink-0 text-xl text-charcoal/45 font-serif font-black'>
+			{stepsList.map((step, idx) => {
+				const key = getKeyId(step).concat('-step');
+				return (
+					<li
+						key={key}
+						onClick={() => setActiveStep(idx)}
+						className={`${getStepClass(idx)}`}
+					>
+						{`${String(idx + 1).padStart(2, '0')} ${step}`}
+					</li>
+				);
+			})}
+		</ul>
 	);
 }
