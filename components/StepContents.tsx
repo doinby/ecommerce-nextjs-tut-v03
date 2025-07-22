@@ -1,5 +1,7 @@
+import { Dispatch, SetStateAction } from 'react';
 import { getKeyId } from '@/lib/ultils';
 import classNames from 'classnames';
+import StepContentCards from './StepContentCards';
 
 const stepItems = [
 	{
@@ -101,12 +103,14 @@ const stepItems = [
 
 interface StepsContentProps {
 	activeStep: number;
-	setActiveStep: (step: number) => void;
+	setActiveStep: Dispatch<SetStateAction<number>>;
+	setInput: Dispatch<SetStateAction<number[]>>;
 }
 
-export default function StepsContent({
+export default function StepContents({
 	activeStep,
 	setActiveStep,
+	setInput,
 }: StepsContentProps) {
 	function getQuestionClass(idx: number) {
 		return classNames({
@@ -128,15 +132,7 @@ export default function StepsContent({
 					>
 						<h3 className='collapse-title text-2xl'>{question}</h3>
 						<div className='collapse-content grid grid-cols-3 gap-6'>
-							{options.map(({ title, description }) => {
-								const key = getKeyId(title).concat('-card');
-								return (
-									<div key={key} className='card bg-neutral p-6'>
-										<h4 className='card-title'>{title}</h4>
-										<p className='card-content'>{description}</p>
-									</div>
-								);
-							})}
+							<StepContentCards options={options} />
 						</div>
 					</article>
 				);

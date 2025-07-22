@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import HeroSection from '@/components/HeroSection';
 import HowSection from '@/components/HowSection';
 import StepsNavbar from '@/components/StepsNavbar';
-import StepsContent from '@/components/StepsContent';
+import StepContents from '@/components/StepContents';
 
 const createAPlanContent = {
 	image: '/assets/plan/desktop/image-hero-blackcup.jpg',
@@ -17,6 +17,7 @@ const createAPlanContent = {
 export default function CreateAPlanPage() {
 	const pathname = usePathname();
 	const [activeStep, setActiveStep] = useState(0);
+	const [input, setInput] = useState<number[]>([]);
 
 	return (
 		<>
@@ -24,7 +25,11 @@ export default function CreateAPlanPage() {
 			<HowSection pathname={pathname} />
 			<section className='px-16 flex gap-16'>
 				<StepsNavbar activeStep={activeStep} setActiveStep={setActiveStep} />
-				<StepsContent activeStep={activeStep} setActiveStep={setActiveStep} />
+				<StepContents
+					activeStep={activeStep}
+					setActiveStep={setActiveStep}
+					setInput={setInput}
+				/>
 			</section>
 		</>
 	);
