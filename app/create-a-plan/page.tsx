@@ -1,8 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 import HeroSection from '@/components/HeroSection';
 import HowSection from '@/components/HowSection';
-import { usePathname } from 'next/navigation';
+import StepsNavbar from '@/components/StepsNavbar';
 
 const createAPlanContent = {
 	image: '/assets/plan/desktop/image-hero-blackcup.jpg',
@@ -13,12 +15,15 @@ const createAPlanContent = {
 
 export default function CreateAPlanPage() {
 	const pathname = usePathname();
-	console.log('pathname:', pathname);
+	const [activeStep, setActiveStep] = useState(0);
 
 	return (
 		<>
 			<HeroSection content={createAPlanContent} />
 			<HowSection pathname={pathname} />
+			<div className='flex'>
+				<StepsNavbar activeStep={activeStep} setActiveStep={setActiveStep} />
+			</div>
 		</>
 	);
 }
