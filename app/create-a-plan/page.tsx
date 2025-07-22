@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import HeroSection from '@/components/HeroSection';
 import HowSection from '@/components/HowSection';
 import StepsNavbar from '@/components/StepsNavbar';
+import StepsContent from '@/components/StepsContent';
 
 const createAPlanContent = {
 	image: '/assets/plan/desktop/image-hero-blackcup.jpg',
@@ -21,9 +22,10 @@ export default function CreateAPlanPage() {
 		<>
 			<HeroSection content={createAPlanContent} />
 			<HowSection pathname={pathname} />
-			<div className='flex'>
+			<section className='px-16 flex gap-16'>
 				<StepsNavbar activeStep={activeStep} setActiveStep={setActiveStep} />
-			</div>
+				<StepsContent activeStep={activeStep} setActiveStep={setActiveStep} />
+			</section>
 		</>
 	);
 }
