@@ -1,23 +1,12 @@
+import { useActiveStep } from '@/lib/activeStep';
 import { getKeyId } from '@/lib/ultils';
 import classNames from 'classnames';
+import { stepList } from '@/lib/data';
 
-const stepsList = [
-	'Preferences',
-	'Bean type',
-	'Quantity',
-	'Grind option',
-	'Deliveries',
-];
+export default function StepsNavbar() {
+	const activeStep = useActiveStep().activeStep;
+	const setActiveStep = useActiveStep().setActiveStep;
 
-interface StepsNavbarProps {
-	activeStep: number;
-	setActiveStep: (step: number) => void;
-}
-
-export default function StepsNavbar({
-	activeStep,
-	setActiveStep,
-}: StepsNavbarProps) {
 	function getStepClass(idx: number) {
 		return classNames({
 			'relative py-6 border-b-1': true,
@@ -28,7 +17,7 @@ export default function StepsNavbar({
 
 	return (
 		<ul className='shrink-0 text-xl text-charcoal/45 font-serif font-black'>
-			{stepsList.map((step, idx) => {
+			{stepList.map((step, idx) => {
 				const key = getKeyId(step).concat('-step');
 				return (
 					<li
