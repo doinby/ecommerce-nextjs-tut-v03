@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import HeroSection from '@/components/HeroSection';
 import HowSection from '@/components/HowSection';
@@ -13,8 +12,8 @@ export default function CreateAPlanPage() {
 
 	return (
 		<>
-			{/* <HeroSection content={createAPlanHeroContent} />
-			<HowSection pathname={pathname} /> */}
+			<HeroSection content={createAPlanHeroContent} />
+			<HowSection pathname={pathname} />
 			<section className='px-16 flex gap-16'>
 				<StepsNavbar />
 				<StepContents />

@@ -1,15 +1,9 @@
 import { useState } from 'react';
 import classNames from 'classnames';
 import { getKeyId } from '@/lib/ultils';
+import { StepOptions } from '@/lib/interfaces';
 
-interface StepContentCardsProps {
-	options: {
-		title: string;
-		description: string;
-	}[];
-}
-
-export default function StepContentCards({ options }: StepContentCardsProps) {
+export default function StepContentCards({ options }: StepOptions) {
 	const [selected, setSelected] = useState<number | undefined>();
 	function getCardClass(idx: number) {
 		return classNames({
@@ -20,7 +14,7 @@ export default function StepContentCards({ options }: StepContentCardsProps) {
 
 	return (
 		<>
-			{options.map(({ title, description }, idx) => {
+			{options.map(({ optionTitle: title, description }, idx) => {
 				const key = getKeyId(title).concat('-card');
 				return (
 					<div
