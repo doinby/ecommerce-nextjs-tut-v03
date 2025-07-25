@@ -25,6 +25,16 @@ export interface activeStep {
 	setActiveStep: (idx: number) => void;
 }
 
+export interface selectedOptions {
+	selectedItem: {
+		stepTitle: string;
+		option: {
+			optionTitle: string;
+			description: string;
+		};
+	}[];
+}
+
 export interface StepOptions {
 	options: {
 		optionTitle: string;
