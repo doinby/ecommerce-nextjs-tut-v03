@@ -3,14 +3,11 @@ import classNames from 'classnames';
 import StepContentCards from './StepContentCards';
 import { stepItems } from '../lib/data';
 import { useActiveStep } from '@/lib/activeStep';
-import { useStore } from '@/lib/store';
 import { ReactNode } from 'react';
 
 export default function StepContents({ children }: { children: ReactNode }) {
 	const activeStep = useActiveStep().activeStep;
 	const setActiveStep = useActiveStep().setStep;
-	const resetStep = useActiveStep().resetStep;
-	const resetOption = useStore((store) => store.resetOption);
 
 	function getQuestionClass(idx: number) {
 		return classNames({
@@ -20,7 +17,7 @@ export default function StepContents({ children }: { children: ReactNode }) {
 	}
 
 	return (
-		<div>
+		<div className='space-y-8'>
 			{stepItems.map(({ stepTitle, question, options }, idx) => {
 				const key = getKeyId(question).concat('-question');
 				return (
