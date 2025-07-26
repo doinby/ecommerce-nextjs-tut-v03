@@ -16,7 +16,7 @@ export default function StepsNavbar() {
 	}
 
 	return (
-		<ul className='shrink-0 text-xl text-charcoal/45 font-serif font-black'>
+		<ul className='shrink-0 w-48 text-xl text-charcoal/45 font-serif font-black'>
 			{stepList.map((step, idx) => {
 				const key = getKeyId(step).concat('-step');
 				return (

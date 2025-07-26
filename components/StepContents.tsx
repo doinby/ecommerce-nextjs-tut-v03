@@ -4,8 +4,9 @@ import StepContentCards from './StepContentCards';
 import { stepItems } from '../lib/data';
 import { useActiveStep } from '@/lib/activeStep';
 import { useStore } from '@/lib/store';
+import { ReactNode } from 'react';
 
-export default function StepContents() {
+export default function StepContents({ children }: { children: ReactNode }) {
 	const activeStep = useActiveStep().activeStep;
 	const setActiveStep = useActiveStep().setStep;
 	const resetStep = useActiveStep().resetStep;
@@ -19,7 +20,7 @@ export default function StepContents() {
 	}
 
 	return (
-		<div className=''>
+		<div>
 			{stepItems.map(({ stepTitle, question, options }, idx) => {
 				const key = getKeyId(question).concat('-question');
 				return (
@@ -36,16 +37,7 @@ export default function StepContents() {
 					</article>
 				);
 			})}
-			<button
-				type='reset'
-				onClick={() => {
-					resetOption();
-					resetStep();
-				}}
-				className='btn btn-primary'
-			>
-				Reset
-			</button>
+			{children}
 		</div>
 	);
 }
