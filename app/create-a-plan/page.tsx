@@ -6,6 +6,7 @@ import HowSection from '@/components/HowSection';
 import StepsNavbar from '@/components/StepsNavbar';
 import StepContents from '@/components/StepContents';
 import { createAPlanHeroContent } from '@/lib/data';
+import PlanSummary from '@/components/PlanSummary';
 
 export default function CreateAPlanPage() {
 	const pathname = usePathname();
@@ -16,7 +17,9 @@ export default function CreateAPlanPage() {
 			<HowSection pathname={pathname} />
 			<section className='px-16 flex gap-16'>
 				<StepsNavbar />
-				<StepContents />
+				<StepContents>
+					<PlanSummary />
+				</StepContents>
 			</section>
 		</>
 	);
