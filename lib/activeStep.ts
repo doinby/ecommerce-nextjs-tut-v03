@@ -1,10 +1,22 @@
 import { create } from 'zustand';
-import { activeStep } from './interfaces';
+import { persist } from 'zustand/middleware';
 
-export const useActiveStep = create<activeStep>((set) => ({
-	activeStep: 0,
-	setActiveStep: (idx) =>
-		set(() => ({
-			activeStep: idx,
-		})),
-}));
+interface activeStep {
+	activeStep: number;
+	setStep: (idx: number) => void;
+	resetStep: () => void;
+}
+
+export const useActiveStep = create<activeStep>()(
+	persist(
+		(set) => ({
+			activeStep: 0,
+			setStep: (idx) =>
+				set(() => ({
+					activeStep: idx,
+				})),
+			resetStep: () => set({ activeStep: 0 }),
+		}),
+		{ name: 'activeStep' }
+	)
+);

@@ -20,24 +20,13 @@ export interface Product {
 	object: string;
 }
 
-export interface activeStep {
-	activeStep: number;
-	setActiveStep: (idx: number) => void;
+export interface Option {
+	optionTitle: string;
+	description: string;
 }
 
-export interface selectedOptions {
-	selectedItem: {
-		stepTitle: string;
-		option: {
-			optionTitle: string;
-			description: string;
-		};
-	}[];
-}
-
-export interface StepOptions {
-	options: {
-		optionTitle: string;
-		description: string;
-	}[];
+export interface StepItem {
+	stepTitle: string;
+	question: string;
+	options: Option[];
 }

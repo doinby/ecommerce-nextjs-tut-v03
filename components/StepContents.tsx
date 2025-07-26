@@ -3,10 +3,13 @@ import classNames from 'classnames';
 import StepContentCards from './StepContentCards';
 import { stepItems } from '../lib/data';
 import { useActiveStep } from '@/lib/activeStep';
+import { useStore } from '@/lib/store';
 
 export default function StepContents() {
 	const activeStep = useActiveStep().activeStep;
-	const setActiveStep = useActiveStep().setActiveStep;
+	const setActiveStep = useActiveStep().setStep;
+	const resetStep = useActiveStep().resetStep;
+	const resetOption = useStore((store) => store.resetOption);
 
 	function getQuestionClass(idx: number) {
 		return classNames({
@@ -17,7 +20,7 @@ export default function StepContents() {
 
 	return (
 		<div className=''>
-			{stepItems.map(({ question, options }, idx) => {
+			{stepItems.map(({ stepTitle, question, options }, idx) => {
 				const key = getKeyId(question).concat('-question');
 				return (
 					<article
@@ -28,11 +31,21 @@ export default function StepContents() {
 					>
 						<h3 className='collapse-title text-2xl'>{question}</h3>
 						<div className='collapse-content grid grid-cols-3 gap-6'>
-							<StepContentCards options={options} />
+							<StepContentCards stepTitle={stepTitle} options={options} />
 						</div>
 					</article>
 				);
 			})}
+			<button
+				type='reset'
+				onClick={() => {
+					resetOption();
+					resetStep();
+				}}
+				className='btn btn-primary'
+			>
+				Reset
+			</button>
 		</div>
 	);
 }

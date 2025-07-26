@@ -5,7 +5,7 @@ import { stepList } from '@/lib/data';
 
 export default function StepsNavbar() {
 	const activeStep = useActiveStep().activeStep;
-	const setActiveStep = useActiveStep().setActiveStep;
+	const setActiveStep = useActiveStep().setStep;
 
 	function getStepClass(idx: number) {
 		return classNames({
