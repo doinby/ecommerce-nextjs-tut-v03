@@ -25,7 +25,10 @@ export default function StepsNavbar() {
 						onClick={() => setActiveStep(idx)}
 						className={`${getStepClass(idx)}`}
 					>
-						{`${String(idx + 1).padStart(2, '0')} ${step}`}
+						<p className='flex gap-4'>
+							{`${String(idx + 1).padStart(2, '0')}`}
+							<span>{step}</span>
+						</p>
 					</li>
 				);
 			})}
