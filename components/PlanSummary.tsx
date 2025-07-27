@@ -1,33 +1,38 @@
 import { useActiveStep } from '@/lib/activeStep';
-import { stepList, stepListId } from '@/lib/data';
+import { stepList } from '@/lib/data';
 import { useStore } from '@/lib/store';
 import classNames from 'classnames';
-import { getKeyId } from '@/lib/ultils';
+import React, { useState } from 'react';
 
 export default function PlanSummary() {
 	const resetStep = useActiveStep().resetStep;
 	const resetOption = useStore((store) => store.resetOption);
 	const store = useStore((store) => store.options);
+	const [unselected, setUnselected] = useState<string[]>([]);
+	console.log('unselected:', unselected);
+	// console.log(store);
 
-	const plan = store.map(
-		(option) =>
-			stepList.includes(option.stepTitle) && {
-				[getKeyId(option.stepTitle)]: option.optionTitle,
-			}
-	);
+	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+		const storedSteps = store.map((item) => item.stepTitle);
+		setUnselected(stepList.filter((item) => !storedSteps.includes(item)));
+
+		e.preventDefault();
+	};
 
 	function reset() {
 		resetStep();
 		resetOption();
 	}
 
-	function displayOption(option: string) {
-		const result = plan.find((item) => item && option in item);
+	function displayOption(query: string) {
+		const matchedObj = store.find((item) => item.stepTitle === query);
 		const className = classNames({
-			'text-apricot underline underline-offset-3': result,
+			'text-apricot underline underline-offset-3': matchedObj,
+			'relative text-error': !matchedObj && unselected.length,
 		});
-		if (result) {
-			return <span className={className}>{result[option]}</span>;
+
+		if (matchedObj) {
+			return <span className={className}>{matchedObj.optionTitle}</span>;
 		} else {
 			return <span className={className}>＿＿＿</span>;
 		}
@@ -49,17 +54,22 @@ export default function PlanSummary() {
 					</div>
 
 					<h4 className='text-lg'>
-						“I drink coffee as {displayOption(stepListId[0])}, with a{' '}
-						{displayOption(stepListId[1])} type of bean.{' '}
-						{displayOption(stepListId[2])} ground ala{' '}
-						{displayOption(stepListId[3])} , sent to me{' '}
-						{displayOption(stepListId[4])}
+						“I drink coffee as {displayOption(stepList[0])}, with a{' '}
+						{displayOption(stepList[1])} type of bean.{' '}
+						{displayOption(stepList[2])} ground ala {displayOption(stepList[3])}
+						, sent to me {displayOption(stepList[4])}
 						.”
 					</h4>
 				</div>
 
 				<div className='card-actions'>
-					<button className='btn btn-primary w-full'>Confirm my plan!</button>
+					<button
+						type='submit'
+						onClick={handleSubmit}
+						className='btn btn-primary w-full'
+					>
+						Confirm my plan!
+					</button>
 				</div>
 			</div>
 		</div>
