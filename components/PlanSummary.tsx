@@ -9,27 +9,40 @@ export default function PlanSummary() {
 	const resetOption = useStore((store) => store.resetOption);
 	const store = useStore((store) => store.options);
 	const [unselected, setUnselected] = useState<string[]>([]);
-	console.log('unselected:', unselected);
-	// console.log(store);
+	// console.log('unselected:', unselected.length > 0);
+	const [isError, setIsError] = useState(false);
+	console.log('isError:', isError);
 
-	const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		const storedSteps = store.map((item) => item.stepTitle);
-		setUnselected(stepList.filter((item) => !storedSteps.includes(item)));
-
+		const filteredArr = stepList.filter((item) => !storedSteps.includes(item));
+		setUnselected(filteredArr);
+		setIsError(filteredArr.length > 0);
 		e.preventDefault();
 	};
 
 	function reset() {
 		resetStep();
 		resetOption();
+		setIsError(false);
 	}
 
 	function displayOption(query: string) {
 		const matchedObj = store.find((item) => item.stepTitle === query);
 		const className = classNames({
 			'text-apricot underline underline-offset-3': matchedObj,
-			'relative text-error': !matchedObj && unselected.length,
+			'relative text-error': !matchedObj && isError,
 		});
+
+		if (!matchedObj && isError) {
+			return (
+				<span className={className}>
+					<a href='#' className='cursor-pointer'>
+						＿＿＿
+					</a>
+				</span>
+			);
+		}
 
 		if (matchedObj) {
 			return <span className={className}>{matchedObj.optionTitle}</span>;
