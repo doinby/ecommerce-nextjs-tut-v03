@@ -1,28 +1,33 @@
 import { useActiveStep } from '@/lib/activeStep';
-import { stepList } from '@/lib/data';
+import { stepList, stepListId } from '@/lib/data';
 import { useStore } from '@/lib/store';
 import classNames from 'classnames';
+import { getKeyId } from '@/lib/ultils';
 
 export default function PlanSummary() {
 	const resetStep = useActiveStep().resetStep;
 	const resetOption = useStore((store) => store.resetOption);
 	const store = useStore((store) => store.options);
 
-	const plan = store.map((option) => {
-		const key = option.stepTitle.split(' ')[0].toLowerCase();
+	const plan = store.map(
+		(option) =>
+			stepList.includes(option.stepTitle) && {
+				[getKeyId(option.stepTitle)]: option.optionTitle,
+			}
+	);
 
-		return stepList.includes(option.stepTitle)
-			? { [key]: option.optionTitle }
-			: undefined;
-	});
+	function reset() {
+		resetStep();
+		resetOption();
+	}
 
 	function displayOption(option: string) {
-		const result = plan.find((item) => item && option in item)?.[option];
+		const result = plan.find((item) => item && option in item);
 		const className = classNames({
 			'text-apricot underline underline-offset-3': result,
 		});
 		if (result) {
-			return <span className={className}>{result}</span>;
+			return <span className={className}>{result[option]}</span>;
 		} else {
 			return <span className={className}>＿＿＿</span>;
 		}
@@ -36,10 +41,7 @@ export default function PlanSummary() {
 						<p className=''>Order Summary</p>
 						<button
 							type='reset'
-							onClick={() => {
-								resetOption();
-								resetStep();
-							}}
+							onClick={reset}
 							className='btn text-apricot btn-link'
 						>
 							Reset Plan
@@ -47,10 +49,11 @@ export default function PlanSummary() {
 					</div>
 
 					<h4 className='text-lg'>
-						“I drink coffee as {displayOption('preferences')}, with a{' '}
-						{displayOption('bean')} type of bean. {displayOption('quantity')}{' '}
-						ground ala {displayOption('grind')} , sent to me{' '}
-						{displayOption('deliveries')}
+						“I drink coffee as {displayOption(stepListId[0])}, with a{' '}
+						{displayOption(stepListId[1])} type of bean.{' '}
+						{displayOption(stepListId[2])} ground ala{' '}
+						{displayOption(stepListId[3])} , sent to me{' '}
+						{displayOption(stepListId[4])}
 						.”
 					</h4>
 				</div>
