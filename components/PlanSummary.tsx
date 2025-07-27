@@ -16,19 +16,16 @@ export default function PlanSummary() {
 			: undefined;
 	});
 
-	const optionClasses = classNames({
-		'text-apricot underline underline-offset-3': true,
-	});
-
 	function displayOption(option: string) {
 		const result = plan.find((item) => item && option in item)?.[option];
-		return (
-			<span
-				className={`${result && 'text-apricot underline underline-offset-3'}`}
-			>
-				{result ? result : '＿＿＿'}
-			</span>
-		);
+		const className = classNames({
+			'text-apricot underline underline-offset-3': result,
+		});
+		if (result) {
+			return <span className={className}>{result}</span>;
+		} else {
+			return <span className={className}>＿＿＿</span>;
+		}
 	}
 
 	return (
